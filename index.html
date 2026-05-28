@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Copilot Scraping Test Site</title>
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    table { border-collapse: collapse; width: 80%; margin-top: 20px; }
+    th, td { border: 1px solid black; padding: 8px; text-align: center; }
+    button { margin-top: 10px; }
+  </style>
+</head>
+
+<body>
+
+<h1>Customer Data (Fake)</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th rowspan="2">Customer</th>
+      <th colspan="2">Usage</th>
+    </tr>
+    <tr>
+      <th>Electricity (kWh)</th>
+      <th>Cost (€)</th>
+    </tr>
+  </thead>
+
+  <tbody id="dataTable">
+    <tr><td>Alice</td><td>120</td><td>30</td></tr>
+    <tr><td>Bob</td><td>300</td><td>75</td></tr>
+    <tr><td>Charlie</td><td>150</td><td>40</td></tr>
+  </tbody>
+</table>
+
+<button onclick="addRow()">Add Random Row</button>
+<button onclick="changeData()">Simulate Data Change</button>
+
+<script>
+function addRow() {
+  let table = document.getElementById("dataTable");
+  let row = table.insertRow();
+  let id = table.rows.length;
+
+  row.innerHTML = `
+    <td>User${id}</td>
+    <td>${Math.floor(Math.random() * 500)}</td>
+    <td>${Math.floor(Math.random() * 150)}</td>`;
+}
+
+function changeData() {
+  let rows = document.querySelectorAll("#dataTable tr");
+
+  rows.forEach(row => {
+    let cells = row.children;
+    cells[1].innerText = Math.floor(Math.random() * 500);
+    cells[2].innerText = Math.floor(Math.random() * 150);
+  });
+}
+</script>
+
+</body>
+</html>
